@@ -148,28 +148,66 @@ nav a:hover {
     color: #76c893;
 }
 
-.news-item {
-    background-color: #1e1e1e;
-    margin: 20px 0;
-    padding: 20px;
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.news-box {
+    position: relative;
+    background-size: cover;
+    background-position: center;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    height: 200px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.news-item:hover {
-    transform: scale(1.02);
+.news-box:hover {
+    transform: scale(1.05);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-.news-item h3 {
-    margin: 0 0 10px;
-    color: #00cec9;
+.news-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(5px);
 }
 
-.news-item p {
+.news-box:hover::after {
+    opacity: 1;
+}
+
+.news-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.news-box:hover .news-text {
+    opacity: 1;
+}
+
+.news-text h3 {
+    margin: 0 0 5px;
+    font-size: 1.5rem;
+}
+
+.news-text p {
     margin: 0;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 footer {
@@ -184,16 +222,4 @@ footer p {
     margin: 0;
     font-size: 0.9rem;
     color: #aaa;
-}
-
-/* Scroll effect */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
